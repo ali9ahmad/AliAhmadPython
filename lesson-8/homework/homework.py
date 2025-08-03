@@ -152,4 +152,443 @@ result = perform_list_operation(sample_list)
 print(result)
 
 # Python File Input Output: Exercises, Practice, Solution
+1.
+def read_file(file_path):
+    try:
+        with open(file_path, 'r') as file: 
+            content = file.read()            
+        return content
+    except FileNotFoundError:
+        return "File not found."
+    except Exception as e:
+        return f"An error occurred: {e}"
 
+file_path = 'your_file.txt'  
+
+file_content = read_file(file_path)
+print(file_content)
+
+2.
+def read_first_n_lines(file_path, n):
+    try:
+        with open(file_path, 'r') as file:  
+            for _ in range(n):               
+                line = file.readline()
+                if not line:                 
+                    break
+                print(line.strip())           
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+file_path = 'your_file.txt' 
+n = 5                         
+
+read_first_n_lines(file_path, n)
+
+3.
+def append_text_to_file(file_path, text):
+    with open(file_path, 'a') as file:  
+        file.write(text + '\n')         
+
+def read_file(file_path):
+    try:
+        with open(file_path, 'r') as file:  
+            content = file.read()           
+        return content
+    except FileNotFoundError:
+        return "File not found."
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+file_path = 'your_file.txt'  
+text_to_append = "This is the text to append."  
+
+append_text_to_file(file_path, text_to_append)
+
+updated_content = read_file(file_path)
+print("Updated file content:")
+print(updated_content)
+
+4.
+def read_last_n_lines(file_path, n):
+    try:
+        with open(file_path, 'r') as file:  
+            lines = file.readlines()          
+            last_n_lines = lines[-n:]        
+            for line in last_n_lines:
+                print(line.strip())         
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+file_path = 'your_file.txt'
+n = 5                      
+
+read_last_n_lines(file_path, n)
+
+5.
+def read_file_to_list(file_path):
+    lines_list = []  
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:             
+                lines_list.append(line.strip())
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    return lines_list
+
+file_path = 'your_file.txt'  
+
+lines = read_file_to_list(file_path)
+
+print("Lines in the file:")
+for line in lines:
+    print(line)
+
+6.
+def read_file_to_variable(file_path):
+    content = ""  
+    try:
+        with open(file_path, 'r') as file:  
+            for line in file:                
+                content += line               
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    return content
+
+file_path = 'your_file.txt'  
+
+file_content = read_file_to_variable(file_path)
+
+print("Content of the file:")
+print(file_content)
+
+7.
+def read_file_to_array(file_path):
+    lines_array = []  
+    try:
+        with open(file_path, 'r') as file:  
+            for line in file:               
+                lines_array.append(line.strip()) 
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    return lines_array
+
+file_path = 'your_file.txt'  
+
+lines = read_file_to_array(file_path)
+
+print("Lines in the file:")
+for line in lines:
+    print(line)
+
+8.
+def find_longest_words(file_path):
+    longest_words = []
+    max_length = 0
+    
+    try:
+        with open(file_path, 'r') as file:  
+            for line in file:                 
+                words = line.split()           
+                for word in words:             
+                    word_length = len(word)     
+                    if word_length > max_length:
+                        max_length = word_length  
+                        longest_words = [word]    
+                    elif word_length == max_length:
+                        longest_words.append(word)  
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    return longest_words
+
+file_path = 'your_file.txt' 
+
+9.
+def count_lines_in_file(file_path):
+    line_count = 0  
+    try:
+        with open(file_path, 'r') as file:  
+            for line in file:                 
+                line_count += 1                
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    return line_count
+
+file_path = 'your_file.txt'  
+
+number_of_lines = count_lines_in_file(file_path)
+
+print(f"The number of lines in the file is: {number_of_lines}")
+
+longest_words = find_longest_words(file_path)
+
+print("Longest word(s):")
+for word in longest_words:
+    print(word)
+
+10.
+from collections import Counter
+import re
+
+def count_word_frequency(file_path):
+    word_count = Counter()  
+    
+    try:
+        with open(file_path, 'r') as file:
+            for line in file:             
+                
+                words = re.findall(r'\b\w+\b', line.lower())
+                word_count.update(words) 
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    return word_count
+
+file_path = 'your_file.txt'
+
+word_frequencies = count_word_frequency(file_path)
+
+print("Word frequencies:")
+for word, count in word_frequencies.items():
+    print(f"{word}: {count}")
+
+11.
+import os
+
+def get_file_size(file_path):
+    try:
+        file_size = os.path.getsize(file_path)  
+        return file_size
+    except FileNotFoundError:
+        print("File not found.")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+file_path = 'your_file.txt' 
+
+size = get_file_size(file_path)
+
+if size is not None:
+    print(f"The size of the file is: {size} bytes")
+
+12.
+def write_list_to_file(file_path, data_list):
+    try:
+        with open(file_path, 'w') as file: 
+            for item in data_list:            
+                file.write(item + '\n')      
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+
+file_path = 'output.txt'  
+
+data_list = ['Hello, world!', 'This is a test.', 'Writing a list to a file.']
+
+write_list_to_file(file_path, data_list)
+
+print(f"Data has been written to {file_path}.")
+
+13.
+def copy_file_contents(source_file_path, destination_file_path):
+    try:
+        with open(source_file_path, 'r') as source_file:  
+            with open(destination_file_path, 'w') as dest_file:  
+                for line in source_file:  
+                    dest_file.write(line)   
+        print(f"Contents copied from {source_file_path} to {destination_file_path}.")
+    except FileNotFoundError:
+        print("Source file not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+source_file_path = 'source.txt'    
+destination_file_path = 'destination.txt'  
+
+copy_file_contents(source_file_path, destination_file_path)
+
+14.
+def combine_files(file1_path, file2_path, output_file_path):
+    try:
+        with open(file1_path, 'r') as file1, open(file2_path, 'r') as file2, open(output_file_path, 'w') as output_file:
+            for line1, line2 in zip(file1, file2):  
+                combined_line = line1.strip() + ' ' + line2.strip()  
+                output_file.write(combined_line + '\n')  
+        print(f"Combined lines written to {output_file_path}.")
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+file1_path = 'file1.txt' 
+file2_path = 'file2.txt'
+output_file_path = 'combined_output.txt' 
+
+combine_files(file1_path, file2_path, output_file_path)
+
+15.
+import random
+
+def read_random_line(file_path):
+    try:
+        with open(file_path, 'r') as file:  
+            lines = file.readlines()         
+            if lines:                         
+                random_line = random.choice(lines).strip()  
+                return random_line
+            else:
+                return "The file is empty."
+    except FileNotFoundError:
+        return "File not found."
+    except Exception as e:
+        return f"An error occurred: {e}"
+
+file_path = 'your_file.txt'  
+
+random_line = read_random_line(file_path)
+
+
+print("Random line from the file:")
+print(random_line)
+
+16.
+def is_file_closed(file):
+    return file.closed
+
+
+file_path = 'your_file.txt' 
+
+try:
+    with open(file_path, 'r') as file: 
+     
+        print(f"Is the file closed? {is_file_closed(file)}") 
+    
+    print(f"Is the file closed? {is_file_closed(file)}")  
+except FileNotFoundError:
+    print("File not found.")
+except Exception as e:
+    print(f"An error occurred: {e}")
+
+17.
+def remove_newlines_from_file(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()  
+
+        modified_content = content.replace('\n', ' ')  
+
+        with open(file_path, 'w') as file:
+            file.write(modified_content)
+
+        print(f"Newline characters removed from {file_path}.")
+    except FileNotFoundError:
+        print("File not found.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+file_path = 'your_file.txt'  
+
+remove_newlines_from_file(file_path)
+
+18.
+import re
+
+def count_words_in_file(file_path):
+    try:
+        with open(file_path, 'r') as file:  #
+            content = file.read() 
+
+            words = re.findall(r'\b\w+\b', content) 
+
+            return len(words)  
+    except FileNotFoundError:
+        print("File not found.")
+        return None
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+file_path = 'your_file.txt'  
+
+word_count = count_words_in_file(file_path)
+
+if word_count is not None:
+    print(f"The number of words in the file is: {word_count}")
+
+19.
+def extract_characters_from_files(file_paths):
+    characters = []  
+    for file_path in file_paths:
+        try:
+            with open(file_path, 'r') as file:  
+                content = file.read()
+                characters.extend(list(content)) 
+        except FileNotFoundError:
+            print(f"File not found: {file_path}")
+        except Exception as e:
+            print(f"An error occurred while reading {file_path}: {e}")
+    
+    return characters
+
+file_paths = ['file1.txt', 'file2.txt', 'file3.txt']  
+
+extracted_characters = extract_characters_from_files(file_paths)
+
+print("Extracted characters:")
+print(extracted_characters)
+
+20.
+import string
+
+def create_text_files():
+    for letter in string.ascii_uppercase:  
+        file_name = f"{letter}.txt" 
+        with open(file_name, 'w') as file:  
+            file.write(f"This is file {file_name}.")  
+    print("26 text files created successfully.")
+
+create_text_files()
+
+21.
+def create_alphabet_file(file_path, letters_per_line):
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'  
+    lines = []
+    
+    for i in range(0, len(alphabet), letters_per_line):
+        lines.append(alphabet[i:i + letters_per_line])  
+
+
+    with open(file_path, 'w') as file:
+        file.write('\n'.join(lines))  
+
+    print(f"Alphabet written to {file_path} with {letters_per_line} letters per line.")
+
+
+output_file_path = 'alphabet.txt'  
+letters_per_line = 5 
+
+
+create_alphabet_file(output_file_path, letters_per_line)
